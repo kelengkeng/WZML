@@ -75,11 +75,11 @@ def getHerokuDetails(h_api_key, h_app_name):
             abc += f"<b>├ 👎🏻 USED</b>: {get_readable_time(quota_used)}\n"
             abc += f"<b>├ 👍🏻 FREE</b>: {get_readable_time(quota_remain)}\n"
         else:
-            abc += f'<b></b>\n'
-            abc += f'<b>HEROKU STATS</b>\n'
-            abc += f"<b>FULL:</b> {get_readable_time(account_quota)}\n"
-            abc += f"<b>USED:</b> {get_readable_time(quota_used)}\n"
-            abc += f"<b>FREE:</b> {get_readable_time(quota_remain)}\n"
+            abc += f''
+            abc += f''
+            abc += f""
+            abc += f""
+            abc += f""
         # App Quota
         AppQuotaUsed = 0
         OtherAppsUsage = 0
@@ -104,8 +104,8 @@ def getHerokuDetails(h_api_key, h_app_name):
             abc += f"<b>├ 🗑️ OTHER APP:</b> {get_readable_time(OtherAppsUsage)}\n"
             abc += f'<b>╰─《 ☣️ {CREDIT_NAME} ☣️ 》</b>'
         else:
-            abc += f"<b>APP USAGE:</b> {get_readable_time(AppQuotaUsed)}\n"
-            abc += f"<b>OTHER APP:</b> {get_readable_time(OtherAppsUsage)}\n"
+            abc += f""
+            abc += f""
         return abc
     except Exception as g:
         LOGGER.error(g)
@@ -133,7 +133,7 @@ def stats(update, context):
             last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├</b> 🛠<b>From</b> %cr'"], shell=True).decode()
             botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
         else:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b></b><b>From</b> %cr'"], shell=True).decode()
+            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd from %cr'"], shell=True).decode()
             botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
     else:
         botVersion = 'No UPSTREAM_REPO'
@@ -172,16 +172,15 @@ def stats(update, context):
                     f'<b>╰ 🔻 Download Data:</b> {recv}\n\n'
 
     else:
-            stats = f'<b>BOT STATISTICS</b>\n' \
-                    f'<b>Updated On: </b>{last_commit}\n'\
-                    f'<b>Uptime: </b>{currentTime}\n'\
-                    f'<b>OS Uptime: </b>{osUptime}\n'\
-                    f'<b>CPU: </b>[{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
-                    f'<b>RAM: </b>[{progress_bar(mem_p)}] {mem_p}%\n'\
-                    f'<b>Disk: </b>[{progress_bar(disk)}] {disk}%\n'\
-                    f'<b>Disk Free: </b>{free}\n'\
+            stats = f'<b>Commit Date: </b>{last_commit}\n\n'\
+                    f'<b>Bot Uptime: </b>{currentTime}\n'\
+                    f'<b>OS Uptime: </b>{osUptime}\n\n'\
+                    f'<b>CPU: </b>{cpuUsage}%\n'\
+                    f'<b>RAM: </b>{mem_p}%\n'\
+                    f'<b>Disk: </b>{disk}%\n'\
+                    f'<b>Disk Free: </b>{free}\n\n'\
                     f'<b>Upload Data: </b>{sent}\n'\
-                    f'<b>Download Data: </b>{recv}\n\n'
+                    f'<b>Download Data: </b>{recv}\n'
 
 
 
